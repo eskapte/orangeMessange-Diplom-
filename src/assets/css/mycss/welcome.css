@@ -1,0 +1,188 @@
+/*Welcome page*/
+
+@keyframes fade-right-orange {
+    0% {
+        right: 1500px;
+    }
+    100% {
+        right: 1000px;
+    }
+}
+
+@keyframes fade-left-orange {
+    0% {
+        left: 1500px;
+    }
+    100% {
+        left: 800px;
+    }
+}
+
+@keyframes img-rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fade-in-text {
+    0% {
+        margin-top: 180%;
+        opacity: 0.1;
+    }
+    100% {
+        margin-top: 25%;
+        opacity: 1;
+    }
+}
+
+@keyframes light-button {
+    0% {
+        filter: drop-shadow(4px 4px 20px #FEDBAB);
+    }
+    50% {
+        filter: drop-shadow(4px 4px 30px #FEDBAB);
+    }
+    100% {
+        filter: drop-shadow(4px 4px 20px #FEDBAB);
+    }
+}
+
+@keyframes img-fade {
+    0% {
+        margin-left: 80%;
+        opacity: 0.1;
+    }
+    100% {
+        margin-left: 0;
+        opacity: 1;
+    }
+}
+
+header.welcome-header {
+
+    margin-top: 2%;
+    height: 82px;
+
+    grid-column: 1 / 13;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header img {
+    width: 80%;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 480px;
+}
+
+header nav a {
+    font-size: 18px;
+    color: white;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    padding-bottom: 2px;
+}
+
+header nav a:hover:not(:first-child)
+{
+    padding-bottom: 0px;
+    border-bottom: 2px solid white;
+}
+
+header nav a:first-child {
+    font-weight: bold;
+    border: 2px solid white;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+header nav a:first-child:hover {
+    color: #F7A053;
+    background-color: white;
+    text-shadow: none;
+
+    transition-property: background-color, color;
+    transition-duration: 0.3s;
+}
+
+.welcome-page section {
+    grid-row: 2 / 4;
+    grid-column: 1 / 6;
+    justify-content: start;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    margin-top: 25%;
+    animation: fade-in-text 1s ease-in-out;
+}
+
+.welcome-page section h1 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 48px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.welcome-page section p {
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+
+.welcome-page section a {
+    font-size: 36px;
+    font-weight: 700;
+    background-color: #FACA22;
+    padding: 10px 15px;
+    border-radius: 20px;
+    filter: drop-shadow(4px 4px 20px #FEDBAB);
+    color: white;
+    width: 300px;
+    text-align: center;
+    animation: light-button 1s linear infinite;
+}
+
+.welcome-page section a:hover {
+    animation: none;
+    transition-property: filter;
+    transition-duration: 0.3s;
+    filter: drop-shadow(4px 4px 40px #FEDBAB);
+}
+
+.welcome-page .main-image {
+    grid-column: 6 / 13;
+    grid-row: 2;
+    margin-top: -10%;
+    animation: img-fade 0.8s linear;
+}
+
+.bg-images img:nth-child(1)
+{
+    z-index: -1;
+    position: relative;
+    bottom: 600px;
+    right: 1000px;
+    animation: fade-right-orange 1s ease-in-out, img-rotation 30s linear infinite;
+}
+
+.bg-images img:nth-child(2)
+{
+    z-index: -1;
+    position: relative;
+    bottom: 500px;
+    left: 800px;
+    animation: fade-left-orange 1s ease-in-out, img-rotation 30s linear infinite;
+}

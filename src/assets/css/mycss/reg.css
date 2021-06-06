@@ -1,0 +1,140 @@
+main.reg-page {
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+.reg-page section {
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column: 2/3;
+    margin-right: 1%;
+}
+
+.reg-page section span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.reg-page section span a {
+    font-size: 20px;
+    font-weight: 300;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding-bottom: 2px;
+}
+
+.reg-page section span a:hover {
+    padding-bottom: 0;
+    border-bottom: 2px solid white;
+}
+
+.reg-page section h1 {
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.reg-form {
+    margin-top: 10%;
+    width: 350px;
+    height: 430px;
+    background-color: white;
+    border-radius: 20px;
+    filter: drop-shadow(7px 7px 4px rgba(0, 0, 0, 0.25));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reg-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reg-form h2 {
+    font-size: 36px;
+    font-style: normal;
+    font-weight: normal;
+    color: #583D3D;
+}
+
+/*#login, #password, #password-repeat {*/
+/*    height: 10px;*/
+/*}*/
+
+/*fieldset.PrivateNotchedOutline-root-1 {*/
+/*    top: 0;*/
+/*}*/
+
+div.MuiFormControl-root {
+    margin-bottom: 20px;
+}
+
+label.MuiFormLabel-root.Mui-focused{
+    color: #F7A053;
+}
+
+.reg-form button {
+    width: 70%;
+    height: 36px;
+    /*background-color: #FE983C;*/
+    border-radius: 4px;
+    /*color: white;*/
+    background-color: white;
+    color: #FE983C;
+    border: 2px solid #FE983C;
+    /*border: none;*/
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 5%;
+    font-size: 14px;
+    font-weight: 700;
+    transition-property: background-color, color;
+    transition-duration: 0.3s;
+}
+
+.reg-form button:hover {
+    background-color: #FE983C;
+    color: white;
+}
+
+.bg-images-reg img {
+    z-index: -1;
+    opacity: 0.5;
+    position: relative;
+}
+
+.bg-images-reg img:nth-child(1)
+{
+    left: 400px;
+    top: 100px;
+}
+
+.bg-images-reg img:nth-child(2)
+{
+    top: 200px;
+}
+
+.bg-images-reg img:nth-child(3)
+{
+    right: 1400px;
+}
+
+.bg-images-reg img:nth-child(4)
+{
+    bottom: 1200px;
+    right: 1400px;
+}
+
+.bg-images-reg img:nth-child(5)
+{
+    opacity: 1;
+    bottom: 950px;
+    right: 900px;
+}

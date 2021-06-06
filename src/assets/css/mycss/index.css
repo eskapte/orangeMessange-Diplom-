@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  overflow-y: hidden!important;
+  overflow-x: hidden;
+  background: linear-gradient(118.77deg, #E26B28 14.75%, #F8A355 81.27%) fixed;
+}
+
+main {
+  max-width: 1440px;
+  height: 940px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(12, 70px);
+  grid-gap: 30px;
+
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}

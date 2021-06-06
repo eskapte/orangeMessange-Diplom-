@@ -1,0 +1,138 @@
+main.auth-page {
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+.auth-page section {
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column: 2/3;
+    margin-left: 7%;
+}
+
+.auth-page section span.header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-weight: 300;
+    font-size: 20px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 120%;
+}
+
+.auth-page section span.header-text span {
+    width: 70%;
+}
+
+.auth-page section span.header-text span a {
+    padding-bottom: 2px;
+    font-weight: 500;
+}
+
+.auth-page section span a:hover {
+    padding-bottom: 0;
+    border-bottom: 2px solid white;
+}
+
+.auth-page section h1 {
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 10px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: 50px;
+    width: 105%;
+}
+
+.auth-form {
+    margin-top: 10%;
+    width: 350px;
+    height: 330px;
+    background-color: white;
+    border-radius: 20px;
+    filter: drop-shadow(7px 7px 4px rgba(0, 0, 0, 0.25));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 200px;
+}
+
+.auth-form h2 {
+    font-size: 36px;
+    font-style: normal;
+    font-weight: normal;
+    color: #583D3D;
+}
+
+.auth-form button {
+    width: 70%;
+    height: 36px;
+    /*background-color: #FE983C;*/
+    border-radius: 4px;
+    /*color: white;*/
+    background-color: white;
+    color: #FE983C;
+    border: 2px solid #FE983C;
+    /*border: none;*/
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 2%;
+    font-size: 18px;
+    font-weight: 600;
+    transition-property: background-color, color;
+    transition-duration: 0.3s;
+}
+
+.auth-form button:hover {
+    background-color: #FE983C;
+    color: white;
+}
+
+.bg-images-auth img {
+    z-index: -1;
+    opacity: 0.5;
+    position: relative;
+}
+
+.bg-images-auth img:nth-child(1)
+{
+    bottom: 200px;
+}
+
+.bg-images-auth img:nth-child(2)
+{
+    left: 400px;
+}
+
+.bg-images-auth img:nth-child(3)
+{
+    right: 100px;
+}
+
+.bg-images-auth img:nth-child(4)
+{
+    bottom: 900px;
+    right: 1500px;
+}
+
+.bg-images-auth img:nth-child(5)
+{
+    opacity: 0.9;
+    bottom: 1000px;
+    right: 1000px;
+}
+

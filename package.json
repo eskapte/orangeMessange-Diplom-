@@ -1,0 +1,63 @@
+{
+  "name": "chatvia",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.8.3",
+    "availity-reactstrap-validation": "^2.7.0",
+    "axios": "^0.21.1",
+    "axios-mock-adapter": "^1.19.0",
+    "bootstrap": "^5.0.0-beta2",
+    "dotenv": "^8.2.0",
+    "emoji-mart": "^3.0.1",
+    "fast-deep-equal": "^3.1.3",
+    "firebase": "^8.2.10",
+    "formik": "^2.2.6",
+    "i18next": "^19.9.2",
+    "i18next-browser-languagedetector": "^6.0.1",
+    "jwt-decode": "^3.1.2",
+    "node-sass": "^4.14.1",
+    "react": "^17.0.1",
+    "react-alice-carousel": "^2.4.0",
+    "react-dom": "^17.0.1",
+    "react-i18next": "^11.8.9",
+    "react-image-lightbox": "^5.1.1",
+    "react-perfect-scrollbar": "^1.5.8",
+    "react-redux": "^7.2.2",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.1",
+    "react-slick": "^0.28.0",
+    "reactstrap": "^8.9.0",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3",
+    "simplebar-react": "^2.3.0",
+    "slick-carousel": "^1.8.1",
+    "yup": "^0.32.8"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@material-ui/core": "^4.11.4"
+  }
+}

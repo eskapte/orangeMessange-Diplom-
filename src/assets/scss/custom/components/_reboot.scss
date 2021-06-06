@@ -1,0 +1,43 @@
+/* =============
+   General
+============= */
+
+$medium-orange: rgba(248, 163, 85, 0.7);
+$light-orange: rgba(248, 163, 85, 0.5);
+$myorange: #F8A355;
+$myorange-light: rgba(248, 163, 85, 0.9);
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.h1,.h2,.h3,.h4,.h5,.h6,
+h1,h2,h3,h4,h5,h6 {
+  color: $gray-700;
+  font-family: $font-family-secondary;
+  font-weight: $font-weight-semibold;
+}
+
+a {
+  text-decoration: none !important;
+  color: $light-orange;
+
+  &:hover {
+    color: $myorange;
+  }
+}
+
+label {
+  font-weight: 500;
+}
+
+@media (min-width:1400px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+body {
+  background-color: rgba(245, 125, 0, 0.1)!important;
+}
