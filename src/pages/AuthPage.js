@@ -46,7 +46,7 @@ const AuthPage = (props) => {
         <div className="auth-form">
           <h2>Авторизация</h2>
           <form>
-            <MyInput id='login' label='Логин' helperText='Ваш логин' variant='outlined' autoFocus
+            <MyInput id='login' label='Email' helperText='Ваш email' variant='outlined' autoFocus
               onChange={ e => setLoginText(e.target.value)}
             />
             <MyInput id='password' label='Пароль' helperText='Ваш пароль' variant='outlined'

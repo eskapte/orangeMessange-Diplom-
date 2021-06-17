@@ -16,7 +16,6 @@ import img1 from '../../../assets/images/users/avatar-1.jpg';
 //actions
 import {activeUser, addLoggedinUser, addNewChatUser, createGroup, setActiveTab, showChat} from "../../../redux/actions";
 
-console.log(img1);
 
 class Groups extends Component {
     constructor(props) {
@@ -164,7 +163,8 @@ class Groups extends Component {
                                 <Form>
                                     <div className="mb-4">
                                         <Label className="form-label" htmlFor="addgroupname-input">{t('Group Name')}</Label>
-                                        <Input type="text" className="form-control" id="addgroupname-input" value={this.state.groupName} onChange={(e) => this.handleChangeGroupName(e)} placeholder="Enter Group Name" />
+                                        <Input type="text" className="form-control" id="addgroupname-input" value={this.state.groupName}
+                                               onChange={(e) => this.handleChangeGroupName(e)} placeholder="Enter Group Name" />
                                     </div>
                                     <div className="mb-4">
                                         <Label className="form-label">{t('Group Members')}</Label>
@@ -195,7 +195,8 @@ class Groups extends Component {
                                     </div>
                                     <div>
                                         <Label className="form-label" htmlFor="addgroupdescription-input">Description</Label>
-                                        <textarea className="form-control" id="addgroupdescription-input" value={this.state.groupDesc} onChange={(e) => this.handleChangeGroupDesc(e)} rows="3" placeholder="Enter Description"></textarea>
+                                        <textarea className="form-control" id="addgroupdescription-input" value={this.state.groupDesc}
+                                                  onChange={(e) => this.handleChangeGroupDesc(e)} rows="3" placeholder="Enter Description"></textarea>
                                     </div>
                                 </Form>
                             </ModalBody>
@@ -229,8 +230,8 @@ class Groups extends Component {
                                             <div className="d-flex align-items-center">
                                                 <div className={"chat-user-img me-3 ms-0"}>
                                                     {
-                                                        group.photoURL ? <img src={img1}
-                                                                              className="rounded-circle avatar-sm img-thumbnail"
+                                                        group.photoURL ? <img src={group.photoURL}
+                                                                              className="rounded-circle avatar-sm"
                                                                               alt="Аватар"/> :
                                                           <div className="avatar-sm">
                                                             <span

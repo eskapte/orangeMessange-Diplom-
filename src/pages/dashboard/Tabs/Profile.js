@@ -21,12 +21,7 @@ function Profile(props) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [isOpen1, setIsOpen1] = useState(true);
     const [isOpen2, setIsOpen2] = useState(false);
-    const [files] = useState([
-        { name : "Admin-A.zip", size : "12.5 MB", thumbnail : "ri-file-text-fill" },
-        { name : "Image-1.jpg", size : "4.2 MB", thumbnail : "ri-image-fill" },
-        { name : "Image-2.jpg", size : "3.1 MB", thumbnail : "ri-image-fill" },
-        { name : "Landing-A.zip", size : "6.7 MB", thumbnail : "ri-file-text-fill" },
-    ]);
+    const [files] = useState([]);
 
     /* intilize t variable for multi language implementation */
     const { t } = useTranslation();
@@ -68,7 +63,7 @@ function Profile(props) {
                             <div className="text-center p-4 border-bottom">
                                 <div className="mb-4">
                                     {
-                                        profile.photoURL ? <img src={profile.photoURL} className="rounded-circle avatar-lg img-thumbnail" alt="chatvia" />
+                                        profile.photoURL ? <img src={profile.photoURL} className="rounded-circle avatar-lg" alt="chatvia" />
                                           :
                                           <div className="avatar-md rounded-circle img-thumbnail" style={{marginLeft: '39%'}}>
                                                 <span className="avatar-title rounded-circle bg-soft-primary text-primary" style={{fontSize: '150%'}}>

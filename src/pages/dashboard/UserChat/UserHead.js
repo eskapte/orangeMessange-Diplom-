@@ -45,6 +45,8 @@ function UserHead(props) {
         copyallUsers[props.active_user].messages = [];
 
         props.setFullUser(copyallUsers);
+
+
     }
 
     return (
@@ -75,7 +77,7 @@ function UserHead(props) {
                             <div className="flex-1 overflow-hidden">
                                 <h5 className="font-size-16 mb-0 text-truncate">
                                     <Link to="#" onClick={(e) => openUserSidebar(e)} className="text-reset user-profile-show">
-                                        {props.users[props.active_user].name}
+                                        {props.users[props.active_user].name === "" ? "Аноним" : props.users[props.active_user].name}
                                     </Link>
                                     {(() => {
                                         switch (props.users[props.active_user].status) {
@@ -147,10 +149,10 @@ function UserHead(props) {
                                         <i className="ri-more-fill"></i>
                                     </DropdownToggle>
                                     <DropdownMenu className="dropdown-menu-end">
-                                        <DropdownItem className="d-block d-lg-none user-profile-show" onClick={(e) => openUserSidebar(e)}>View profile <i className="ri-user-2-line float-end text-muted"></i></DropdownItem>
-                                        <DropdownItem>Archive <i className="ri-archive-line float-end text-muted"></i></DropdownItem>
-                                        <DropdownItem>Muted <i className="ri-volume-mute-line float-end text-muted"></i></DropdownItem>
-                                        <DropdownItem onClick={(e) => deleteMessage(e)}>Delete <i className="ri-delete-bin-line float-end text-muted"></i></DropdownItem>
+                                        <DropdownItem className="d-block d-lg-none user-profile-show" onClick={(e) => openUserSidebar(e)}>Профиль <i className="ri-user-2-line float-end text-muted"></i></DropdownItem>
+                                        {/*<DropdownItem>Archive <i className="ri-archive-line float-end text-muted"></i></DropdownItem>*/}
+                                        {/*<DropdownItem>Muted <i className="ri-volume-mute-line float-end text-muted"></i></DropdownItem>*/}
+                                        <DropdownItem onClick={(e) => deleteMessage(e)}>Удалить <i className="ri-delete-bin-line float-end text-muted"></i></DropdownItem>
                                     </DropdownMenu>
                                 </Dropdown>
                             </li>

@@ -64,6 +64,14 @@ div.d-block.d-lg-none.me-2.ms-0 {
         &::placeholder {
             color: $gray-600;
         }
+
+        @media (max-width: 991.98px) {
+            width: 120% !important;
+            input {
+                width: 40%!important;
+            }
+        }
+
     }
 
     .form-control:focus {
@@ -279,7 +287,8 @@ div.d-block.d-lg-none.me-2.ms-0 {
 .chat-conversation {
     height: calc(100vh - 184px);
     @media (max-width: 991.98px) {
-        height: calc(100vh - 152px);
+        //height: calc(100vh - 152px);
+        height: calc(100vh - 200px);
     }
 }
 

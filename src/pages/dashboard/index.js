@@ -13,6 +13,7 @@ import {getFirebaseBackend} from "../../helpers/firebase";
 import {connect, useDispatch, useSelector} from "react-redux";
 import {activeUser, addContact, addLoggedinUser, createGroup, reloadUsers} from "../../redux/chat/actions";
 import {dark} from "@material-ui/core/styles/createPalette";
+import {editProfile} from "../../redux/auth/actions";
 
 
 // class Index extends Component {
@@ -64,16 +65,25 @@ const Index = (props) => {
     const activeUser = useSelector(state => state.Chat.active_user)
     const displayChat = useSelector(state => state.Chat.displayChat)
 
-
     useEffect(() => {
         userDoc.onSnapshot(async(snapshot) => {
 
             const chats = snapshot.data().chats
 
             if (chats) {
-                const newChats = chats.map(chat => {
-                    return {...chat, profilePicture: chat.profilePicture ? chat.profilePicture : "Null"}
-                })
+                const newChats = await Promise.all(chats.map(async(chat) => {
+
+                    const chatRef = db.collection('users').doc(chat.email)
+                    const chatData = await chatRef.get();
+                    const chatProfile = chatData.data().profile;
+
+                    return {...chat,
+                        profilePicture: chatProfile.photoURL ? chatProfile.photoURL : "Null",
+                        location: chatProfile.location ? chatProfile.location : "Неизвестно",
+                        status: chatProfile.status,
+                        name: chatProfile.displayName
+                    }
+                }))
 
                 dispatch(reloadUsers(newChats))
 
@@ -84,16 +94,6 @@ const Index = (props) => {
         })
     }, [])
 
-    // useEffect(async () => {
-    //     const response = db.collection('users').doc(authUser['email'])
-    //     const data = await response.get()
-    //     const chats = data.data().chats
-    //     chats.forEach(chat => {
-    //         dispatch(addLoggedinUser({...chat, profilePicture: chat.profilePicture ? chat.profilePicture : "Null"}))
-    //     })
-    //
-    // }, [])
-
     useEffect(async() => {
         const db = firebase.firestore();
         const usersRef = db.collection('users');
@@ -102,7 +102,7 @@ const Index = (props) => {
         if (users.empty) return ;
 
         users.forEach(user => {
-            if (user.id !== authUser.email) {
+            if (user.id !== authUser.email && user.displayName !== 'Аноним') {
                 const newUser = user.data();
                 dispatch(createGroup({
                     email: user.id,

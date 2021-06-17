@@ -87,7 +87,7 @@ function UserChat(props) {
         })
     }
 
-    const addMessage = (message, type) => {
+    const addMessage = async(message, type) => {
         var messageObj = null;
 
         let d = new Date();
@@ -96,6 +96,8 @@ function UserChat(props) {
 
         let m = d.getMinutes()
         if (m < 10) m = "0" + m;
+
+        const storageRef = firebase.storage().ref()
 
         //matches the message type is text, file or image, and create object according to it
         switch (type) {
@@ -110,10 +112,15 @@ function UserChat(props) {
                 break;
 
             case "fileMessage":
+                const fileRef = storageRef.child('messages/' + message.name)
+                await fileRef.put(message.file)
+                const fileURL = await fileRef.getDownloadURL()
+
                 messageObj = {
-                    message : 'file',
+                    message : message.name,
                     fileMessage : message.name,
-                    size : message.size,
+                    fileURL: fileURL,
+                    size : (+message.size * 0.0009765625 * 0.0009765625).toFixed(2),
                     time : h + ":" + m,
                     userType : "sender",
                     isFileMessage : true,
@@ -122,12 +129,17 @@ function UserChat(props) {
                 break;
 
             case "imageMessage":
-                var imageMessage = [
-                    { image : message },
+
+                const imageRef = storageRef.child('messages/' + message.name)
+                await imageRef.put(message)
+                const imageURL = await imageRef.getDownloadURL()
+
+                let imageMessage = [
+                    {image: imageURL}
                 ]
 
                 messageObj = {
-                    message : 'image',
+                    message : message.name,
                     imageMessage : imageMessage,
                     size : message.size,
                     time : h + ":" + m,
@@ -144,7 +156,7 @@ function UserChat(props) {
         //add message object to chat        
         setchatMessages([...chatMessages, messageObj]);
 
-        loadMessageToFirestore(messageObj);
+        await loadMessageToFirestore(messageObj);
 
         let copyallUsers = [...allUsers];
         copyallUsers[props.active_user].messages = [...chatMessages, messageObj];
@@ -189,7 +201,6 @@ function UserChat(props) {
                               className="chat-conversation p-3 p-lg-4"
                               id="messages">
                                 <ul className="list-unstyled mb-0">
-
 
                                     {
                                         chatMessages.map((chat, key) =>
@@ -238,7 +249,9 @@ function UserChat(props) {
                                                                       chat.fileMessage &&
                                                                       //file input component
                                                                       <FileList fileName={chat.fileMessage}
-                                                                                fileSize={chat.size}/>
+                                                                                fileSize={chat.size}
+                                                                                fileURL={chat.fileURL}
+                                                                      />
                                                                   }
                                                                   {
                                                                       chat.isTyping &&
@@ -264,12 +277,12 @@ function UserChat(props) {
                                                                           <i className="ri-more-2-fill"></i>
                                                                       </DropdownToggle>
                                                                       <DropdownMenu>
-                                                                          <DropdownItem>{t('Copy')} <i
-                                                                            className="ri-file-copy-line float-end text-muted"></i></DropdownItem>
-                                                                          <DropdownItem>{t('Save')} <i
-                                                                            className="ri-save-line float-end text-muted"></i></DropdownItem>
-                                                                          <DropdownItem onClick={toggle}>Forward <i
-                                                                            className="ri-chat-forward-line float-end text-muted"></i></DropdownItem>
+                                                                          {/*<DropdownItem>{t('Copy')} <i*/}
+                                                                          {/*  className="ri-file-copy-line float-end text-muted"></i></DropdownItem>*/}
+                                                                          {/*<DropdownItem>{t('Save')} <i*/}
+                                                                          {/*  className="ri-save-line float-end text-muted"></i></DropdownItem>*/}
+                                                                          {/*<DropdownItem onClick={toggle}>Forward <i*/}
+                                                                          {/*  className="ri-chat-forward-line float-end text-muted"></i></DropdownItem>*/}
                                                                           <DropdownItem
                                                                             onClick={() => deleteMessage(chat.id)}>Delete <i
                                                                             className="ri-delete-bin-line float-end text-muted"></i></DropdownItem>
@@ -367,7 +380,9 @@ function UserChat(props) {
                                                                       chat.fileMessage &&
                                                                       //file input component
                                                                       <FileList fileName={chat.fileMessage}
-                                                                                fileSize={chat.size}/>
+                                                                                fileSize={chat.size}
+                                                                                fileURL={chat.fileURL}
+                                                                      />
                                                                   }
                                                                   {
                                                                       chat.isTyping &&
@@ -393,14 +408,14 @@ function UserChat(props) {
                                                                           <i className="ri-more-2-fill"></i>
                                                                       </DropdownToggle>
                                                                       <DropdownMenu>
-                                                                          <DropdownItem>{t('Copy')} <i
-                                                                            className="ri-file-copy-line float-end text-muted"></i></DropdownItem>
-                                                                          <DropdownItem>{t('Save')} <i
-                                                                            className="ri-save-line float-end text-muted"></i></DropdownItem>
-                                                                          <DropdownItem onClick={toggle}>Forward <i
-                                                                            className="ri-chat-forward-line float-end text-muted"></i></DropdownItem>
+                                                                          {/*<DropdownItem>{t('Copy')} <i*/}
+                                                                          {/*  className="ri-file-copy-line float-end text-muted"></i></DropdownItem>*/}
+                                                                          {/*<DropdownItem>{t('Save')} <i*/}
+                                                                          {/*  className="ri-save-line float-end text-muted"></i></DropdownItem>*/}
+                                                                          {/*<DropdownItem onClick={toggle}>Forward <i*/}
+                                                                          {/*  className="ri-chat-forward-line float-end text-muted"></i></DropdownItem>*/}
                                                                           <DropdownItem
-                                                                            onClick={() => deleteMessage(chat.id)}>Delete <i
+                                                                            onClick={() => deleteMessage(chat.id)}>Удалить <i
                                                                             className="ri-delete-bin-line float-end text-muted"></i></DropdownItem>
                                                                       </DropdownMenu>
                                                                   </UncontrolledDropdown>

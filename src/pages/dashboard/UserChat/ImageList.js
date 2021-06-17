@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { DropdownMenu, DropdownItem, DropdownToggle, UncontrolledDropdown } from "reactstrap";
 import { Link } from "react-router-dom";
 
+
 //i18n
 import { useTranslation } from 'react-i18next';
 
@@ -20,7 +21,46 @@ function ImageList(props) {
     const toggleLightbox = (currentImage) => {
         setisOpen(!isOpen);
         setcurrentImage(currentImage);
-    } 
+    }
+
+    const createBlob = (image) => {
+        const blob = new Blob(
+          [image.image],
+          {type: 'image/*'}
+        )
+        return URL.createObjectURL(blob)
+    }
+
+    const getImageNameFromURl = (url) => {
+        const urlWithOutParams = url.split('messages%2F')[1]
+        return urlWithOutParams.split('?')[0]
+    }
+
+    const downloadImage = (e, imgMsg) => {
+
+        e.preventDefault()
+
+        let xhr = new XMLHttpRequest()
+        xhr.responseType = 'blob'
+        let blob = null;
+        xhr.onload = event => {
+            try {
+                blob = xhr.response
+                let a = document.createElement('a')
+                let url = window.URL.createObjectURL(blob)
+                a.href = url
+                a.download = getImageNameFromURl(imgMsg.image) ?? "Image.jpg"
+                a.click()
+                window.URL.revokeObjectURL(url)
+            }
+            catch (e)
+            {
+                console.log(e)
+            }
+        }
+        xhr.open("GET", 'https://api.allorigins.win/get?url=' + imgMsg.image.trim())
+        xhr.send()
+    }
 
     return (
         <React.Fragment>
@@ -37,19 +77,21 @@ function ImageList(props) {
                                                             <div className="message-img-link">
                                                                 <ul className="list-inline mb-0">
                                                                     <li className="list-inline-item">
-                                                                        <Link to="#">
-                                                                            <i className="ri-download-2-line"></i>
+                                                                        <Link to={imgMsg.image} download onClick={(e) => downloadImage(e, imgMsg)}>
+                                                                            <i className="ri-download-2-line">
+
+                                                                            </i>
                                                                         </Link>
                                                                     </li>
                                                                     <UncontrolledDropdown tag="li" className="list-inline-item">
-                                                                    <DropdownToggle tag="a">
-                                                                        <i className="ri-more-fill"></i>
-                                                                    </DropdownToggle>
+                                                                    {/*<DropdownToggle tag="a">*/}
+                                                                    {/*    <i className="ri-more-fill"></i>*/}
+                                                                    {/*</DropdownToggle>*/}
                                                                     <DropdownMenu>
-                                                                        <DropdownItem>{t('Copy')} <i className="ri-file-copy-line float-end text-muted"></i></DropdownItem>
-                                                                        <DropdownItem>{t('Save')} <i className="ri-save-line float-end text-muted"></i></DropdownItem>
-                                                                        <DropdownItem>{t('Forward')} <i className="ri-chat-forward-line float-end text-muted"></i></DropdownItem>
-                                                                        <DropdownItem>{t('Delete')} <i className="ri-delete-bin-line float-end text-muted"></i></DropdownItem>
+                                                                        {/*<DropdownItem>{t('Copy')} <i className="ri-file-copy-line float-end text-muted"></i></DropdownItem>*/}
+                                                                        {/*<DropdownItem>{t('Save')} <i className="ri-save-line float-end text-muted"></i></DropdownItem>*/}
+                                                                        {/*<DropdownItem>{t('Forward')} <i className="ri-chat-forward-line float-end text-muted"></i></DropdownItem>*/}
+                                                                        <DropdownItem>Удалить <i className="ri-delete-bin-line float-end text-muted"></i></DropdownItem>
                                                                     </DropdownMenu>
                                                                     </UncontrolledDropdown>
                                                                 </ul>
@@ -62,7 +104,7 @@ function ImageList(props) {
                                                                     <Lightbox
                                                                         mainSrc={currentImage}
                                                                         onCloseRequest={toggleLightbox}
-                                                                        imageTitle="Project 1"
+                                                                        imageTitle='Изображение'
                                                                     />
                                                                 )}
                                                         

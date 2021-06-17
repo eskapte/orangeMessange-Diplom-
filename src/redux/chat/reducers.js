@@ -38,13 +38,13 @@ const INIT_STATE = {
     //             { id: 6, message: "hi...Good Morning!", time: "09:05", userType: "sender", isImageMessage : false, isFileMessage : false },
     //             { id: 7, message: "image", time: "10:30", userType: "receiver", isImageMessage : true, isFileMessage : false, imageMessage : [ { image : img4 }, { image : img7 } ] },
     //             { id: 8, message: "please, save this pictures to your file and give it to me after you have done with editing!", time: "10:31", userType: "receiver", isImageMessage : false, isFileMessage : false },
-    //             { id: 9, message: "okay sure😄👍", time: "02:50", userType: "sender", isImageMessage : false, isFileMessage : false },
+    //             { id: 9, message: "Окей, хорошо😄👍", time: "02:50", userType: "sender", isImageMessage : false, isFileMessage : false },
     //     ] },
     //     { id : 1, name : "Mark Messer", profilePicture : avatar3, status : "away",unRead : 2, isGroup: false,
     //         messages: [
     //             { id : 33, isToday : true },
-    //             { id: 1, message: "hello", time: "10.00", userType: "sender", isImageMessage : false, isFileMessage : false },
-    //             { id: 2, message: "images", time: "10:30", userType: "receiver", isImageMessage : true, isFileMessage : false, imageMessage : [ { image : img4 }, { image : img7 } ] },
+    //             { id: 1, message: "Привет", time: "10.00", userType: "sender", isImageMessage : false, isFileMessage : false },
+    //             { id: 2, message: "Вот фото", time: "10:30", userType: "receiver", isImageMessage : true, isFileMessage : false, imageMessage : [ { image : img4 }, { image : img7 } ] },
     //         ]  },
     //     { id : 13, name : "General", profilePicture : "Null", unRead : 0, isGroup: true,
     //         messages: [
@@ -76,14 +76,14 @@ const INIT_STATE = {
     //             { id : 4, userName : "admin", message: "@Doris Brown please review this code, and give me feedback asap", time: "01:31", userType: "sender", isImageMessage : false, isFileMessage : false },
     //             { id : 5, userName : "John Howard",  message: "Good Afternoon everyone !", time: "2:00", userType: "receiver", isImageMessage : false, isFileMessage : false },
     //             { id : 6, userName : "admin",  message: "Good Afternoon everyone !", time: "2:05", userType: "sender", isImageMessage : false, isFileMessage : false },
-    //             { id : 9, userName : "John Howard",  message: "Next meeting tomorrow 10.00AM", time: "2:10", userType: "receiver", isImageMessage : false, isFileMessage : false },
+    //             { id : 9, userName : "John Howard",  message: "Увидимся в 10", time: "2:10", userType: "receiver", isImageMessage : false, isFileMessage : false },
     //         ]  },
     //
     //     { id : 6, name : "Steve Walker", profilePicture : avatar6, status : "away", unRead : 0,  isGroup: false,
     //         messages: [
     //             { id : 33, isToday : true },
     //             { id : 1, message : "file", time : "01:16", userType : "receiver", isImageMessage : false, isFileMessage : true, fileMessage: "Minible-Vertical.zip" },
-    //             { id : 2, message : "Okay 👍, let me check it and get back to you soon", time : "01:16", userType : "sender", isImageMessage : false, isFileMessage : false }
+    //             { id : 2, message : "Окей 👍, я проверю  отвечу тебе позже", time : "01:16", userType : "sender", isImageMessage : false, isFileMessage : false }
     //         ]  },
     //
     //     { id : 7, name : "Albert Rodarte", profilePicture : "Null", status : "online", unRead : 0, isGroup: false, isTyping : true,
@@ -100,7 +100,7 @@ const INIT_STATE = {
     //             { id: 1, message: "hi...Good Morning!", time: "09:05", userType: "receiver", isImageMessage : false, isFileMessage : false },
     //             { id: 2, message: "image", time: "10:30", userType: "sender", isImageMessage : true, isFileMessage : false, imageMessage : [ { image : img4 }, { image : img7 } ] },
     //             { id: 3, message: "please, save this pictures to your file and give it to me after you have done with editing!", time: "10:31", userType: "sender", isImageMessage : false, isFileMessage : false },
-    //             { id: 4, message: "Yeah, Everything is fine👍", time: "02:50", userType: "receiver", isImageMessage : false, isFileMessage : false },
+    //             { id: 4, message: "Хорошо, буду ждать👍", time: "02:50", userType: "receiver", isImageMessage : false, isFileMessage : false },
     //         ]  },
     //
     //     { id : 9, name : "Paul Haynes", profilePicture : avatar7, status : "away", unRead : 0, isGroup: false,
@@ -109,7 +109,7 @@ const INIT_STATE = {
     //             { id: 1, message: "hi...Good Morning!", time: "09:05", userType: "sender", isImageMessage : false, isFileMessage : false },
     //             { id: 2, message: "image", time: "10:30", userType: "receiver", isImageMessage : true, isFileMessage : false, imageMessage : [ { image : img4 }, { image : img7 } ] },
     //             { id: 3, message: "please, save this pictures to your file and give it to me after you have done with editing!", time: "10:31", userType: "receiver", isImageMessage : false, isFileMessage : false },
-    //             { id: 4, message: "Good Morning😄", time: "02:50", userType: "sender", isImageMessage : false, isFileMessage : false },
+    //             { id: 4, message: "Доброе утро😄", time: "02:50", userType: "sender", isImageMessage : false, isFileMessage : false },
     //         ]  },
     //
     //     { id : 2, name : "Jonathan Miller", profilePicture : avatar2, status : "online",unRead : 0, isGroup: false,

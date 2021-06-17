@@ -8,6 +8,12 @@ $myorange: #F8A355;
 $myorange-light: rgba(248, 163, 85, 0.9);
 $mygreen: #06D6A0;
 
+img.rounded-circle.img-fluid {
+    height: 100%!important;
+    width: 150%!important;
+    border-radius: 50%!important;
+}
+
 .bg-light.rounded-lg.input-group.input-group-lg {
 
     button {

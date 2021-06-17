@@ -112,44 +112,44 @@ function UserProfileSidebar(props) {
                             }
                         })()}
 
-                                Active</p>
+                        {props.activeUser.status === 'online' ? "Онлайн" : "Не в сети"}</p>
                 </div>
                 {/* End profile user */}
 
                 {/* Start user-profile-desc */}
                 <SimpleBar style={{ maxHeight: "100%" }} className="p-4 user-profile-desc">
-                    <div className="text-muted">
-                        <p className="mb-4">"{t('If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual.')}"</p>
-                    </div>
+                    {/*<div className="text-muted">*/}
+                    {/*    <p className="mb-4">"{t('If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual.')}"</p>*/}
+                    {/*</div>*/}
 
                     <div id="profile-user-accordion" className="custom-accordion">
                         <Card className="shadow-none border mb-2">
                             {/* import collaps */}
                             <CustomCollapse
-                                title="About"
+                                title="Обо мне"
                                 iconClass="ri-user-2-line"
                                 isOpen={isOpen1}
                                 toggleCollapse={toggleCollapse1}
                             >
 
                                 <div>
-                                    <p className="text-muted mb-1">{t('Name')}</p>
+                                    <p className="text-muted mb-1">Имя</p>
                                     <h5 className="font-size-14">{props.activeUser.name}</h5>
                                 </div>
 
                                 <div className="mt-4">
-                                    <p className="text-muted mb-1">{t('Email')}</p>
+                                    <p className="text-muted mb-1">Email</p>
                                     <h5 className="font-size-14">{props.activeUser.email}</h5>
                                 </div>
 
-                                <div className="mt-4">
-                                    <p className="text-muted mb-1">{t('Time')}</p>
-                                    <h5 className="font-size-14">11:40 AM</h5>
-                                </div>
+                                {/*<div className="mt-4">*/}
+                                {/*    <p className="text-muted mb-1">{t('Time')}</p>*/}
+                                {/*    <h5 className="font-size-14">11:40 AM</h5>*/}
+                                {/*</div>*/}
 
                                 <div className="mt-4">
-                                    <p className="text-muted mb-1">{t('Location')}</p>
-                                    <h5 className="font-size-14 mb-0">California, USA</h5>
+                                    <p className="text-muted mb-1">Расположение</p>
+                                    <h5 className="font-size-14 mb-0">{props.activeUser.location}</h5>
                                 </div>
                             </CustomCollapse>
                         </Card>
@@ -158,7 +158,7 @@ function UserProfileSidebar(props) {
                         <Card className="mb-1 shadow-none border">
                             {/* import collaps */}
                             <CustomCollapse
-                                title="Attached Files"
+                                title="Загруженные файлы"
                                 iconClass="ri-attachment-line"
                                 isOpen={isOpen2}
                                 toggleCollapse={toggleCollapse2}

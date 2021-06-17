@@ -30,14 +30,16 @@ function ChatInput(props) {
         if (e.target.files.length !== 0)
             setfile({
                 name: e.target.files[0].name,
-                size: e.target.files[0].size
+                size: e.target.files[0].size,
+                file: e.target.files[0]
             })
     }
 
     //function for image input change
     const handleImageChange = e => {
         if (e.target.files.length !== 0)
-            setfileImage(URL.createObjectURL(e.target.files[0]))
+            // setfileImage(URL.createObjectURL(e.target.files[0]))
+            setfileImage(e.target.files[0])
     }
 
     const sendMessage = (e) => {

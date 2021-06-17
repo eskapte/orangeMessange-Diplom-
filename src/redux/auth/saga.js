@@ -43,13 +43,10 @@ function* login({ payload: { username, password, history } }) {
     try {
         if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
             const response = yield call(fireBaseBackend.loginUser, username, password);
-
             const db = yield call(firebase.firestore)
-
             const profileResponse = db.collection('users').doc(response['email'])
             const data = yield call(async() => await profileResponse.get())
             const profile = data.data().profile
-
             const userData = {
                 uid: response.uid,
                 displayName: profile.displayName ? profile.displayName : "Аноним",
@@ -65,7 +62,7 @@ function* login({ payload: { username, password, history } }) {
 
             yield call(setLoggedInUser, userData)
             yield call( async() => profileResponse.update({
-                'profile.status': 'онлайн'
+                'profile.status': 'online'
             }))
             yield put(loginUserSuccess(userData));
         } else {
@@ -92,10 +89,11 @@ function* logout({ payload: { history } }) {
             const db = yield call(() => firebase.firestore())
             const profile = db.collection('users').doc(authUser['email'])
             yield call(fireBaseBackend.logout);
-            window.location.href = '/login';
-            yield call( async () => profile.update({
-                'profile.status': 'оффлайн'
+
+            yield call( async () => await profile.update({
+                'profile.status': 'offline'
             }) );
+            window.location.href = '/login';
         }
     } catch (error) {
         console.log(error)
@@ -110,21 +108,33 @@ function* register({ payload: { user } }) {
         const email = user.email;
         const password = user.password;
         if(process.env.REACT_APP_DEFAULTAUTH === "firebase"){
-            const response = yield call(fireBaseBackend.registerUser, email, password);
-            yield put(registerUserSuccess(response));
 
-            const db = yield call(firebase.firestore)
-            const newUserProfile = db.collection('users').doc(email)
-            yield call(async() => await newUserProfile.set({
-                chats: [],
-                profile: {
-                    displayName: "",
-                    location: "",
-                    photoURL: "Null",
-                    status: "оффлайн"
-                },
-                friends: []
-            }))
+            const db = yield call(firebase.firestore);
+            const newUserProfile = db.collection('users').doc(email);
+
+            const root = db.collection('root').doc('permission');
+            const data = yield call(async () => await root.get())
+            const allowEmails = data.data().allowEmails;
+
+            if (allowEmails.indexOf(email) === -1)
+            {
+                throw "You haven't permission to register account."
+            }
+            else {
+                const response = yield call(fireBaseBackend.registerUser, email, password);
+                yield put(registerUserSuccess(response));
+
+                yield call(async () => await newUserProfile.set({
+                    chats: [],
+                    profile: {
+                        displayName: "",
+                        location: "",
+                        photoURL: "",
+                        status: "offline"
+                    },
+                    friends: []
+                }))
+            }
 
         } else {
             const response = yield call(create, '/register', user);

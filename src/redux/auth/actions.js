@@ -6,7 +6,7 @@ import {
     REGISTER_USER_SUCCESS,
     FORGET_PASSWORD,
     FORGET_PASSWORD_SUCCESS,
-    API_FAILED, GET_PROFILE
+    API_FAILED, GET_PROFILE, EDIT_PROFILE
 } from './constants';
 
 
@@ -53,4 +53,9 @@ export const apiError = (error) => ({
 export const getProfile = (profile) => ({
     type: GET_PROFILE,
     payload: profile
+})
+
+export const refreshProfile = (profileData) => ({
+    type: EDIT_PROFILE,
+    payload: profileData
 })

@@ -22,8 +22,9 @@ const RegPage = () => {
   const errors = {
     login: {
       voidInput: "Пустое поле",
-      withoutError: "Придумайте никнейм на английском",
-      loginExist: "Такой логин уже существует"
+      withoutError: "Введите ваш email",
+      loginExist: "Такая почта уже зарегестрирована",
+      permissionError: "Вы не можете зарегестрироваться"
     }
   }
 
@@ -72,6 +73,13 @@ const RegPage = () => {
       dispatch(registerUser({email: loginText, password: passwordText}))
     }
   }
+  const error = useSelector(state => state.Auth.error);
+
+  if (error === "You haven't permission to register account.") {
+    setLoginError(errors.login.permissionError)
+    clearError()
+  }
+
 
     return (
         <main className='reg-page'>
@@ -84,7 +92,7 @@ const RegPage = () => {
               <div className='reg-form'>
                 <h2>Регистрация</h2>
                 <form>
-                  <MyInput value={loginText} onChange={(e) => setLoginText(e.target.value)} id='login' label='Никнейм'
+                  <MyInput value={loginText} onChange={(e) => setLoginText(e.target.value)} id='login' label='Email'
                            variant='outlined'
                            helperText={loginError}
                            error={loginError !== errors.login.withoutError}

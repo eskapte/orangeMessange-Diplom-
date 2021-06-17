@@ -136,3 +136,62 @@ main.auth-page {
     right: 1000px;
 }
 
+@media (max-width: 320px) {
+
+    div#root {
+        width: 100vw;
+        align-items: center;
+    }
+    .auth-form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+
+    html {
+        max-width: 90vw;
+    }
+
+    body {
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+
+    div#root {
+        display: flex;
+        justify-content: center;
+    }
+
+    main.auth-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .auth-form {
+        width: 100%;
+        max-width: 380px;
+        max-height: 350px;
+    }
+
+    .auth-page section h1 {
+        font-size: 8vw;
+        margin-left: 0;
+        width: 90%;
+    }
+
+    .auth-page section span.header-text span {
+        font-size: 5vw;
+        width: 80%!important;
+    }
+
+    div.bg-images-auth {
+        display: none;
+    }
+
+    main.auth-page h1 > img {
+        display: none;
+    }
+}
+

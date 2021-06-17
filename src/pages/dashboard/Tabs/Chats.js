@@ -182,7 +182,7 @@ class Chats extends Component {
                                                     }
 
                                                     <div className="flex-1 overflow-hidden">
-                                                        <h5 className="text-truncate font-size-15 mb-1">{chat.name}</h5>
+                                                        <h5 className="text-truncate font-size-15 mb-1">{chat.name === '' ? "Аноним" : chat.name}</h5>
                                                         <p className="chat-user-message text-truncate mb-0">
                                                             {
                                                                 chat.isTyping ?

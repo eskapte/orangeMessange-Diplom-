@@ -12,7 +12,12 @@ import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 
 //i18n
 import { useTranslation } from 'react-i18next';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import MyInput from "../../../components/MyInput";
+import firebase from "firebase";
+import {getFirebaseBackend} from "../../../helpers/firebase";
+import {setLoggedInUser} from "../../../helpers/authUtils";
+import {refreshProfile, refreshtProfile} from "../../../redux/auth/actions";
 
 function Settings(props) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -20,6 +25,12 @@ function Settings(props) {
     const [isOpen2, setIsOpen2] = useState(false);
     const [isOpen3, setIsOpen3] = useState(false);
     const [isOpen4, setIsOpen4] = useState(false);
+
+    const profile = useSelector(state => state.Auth.user)
+
+    const [name, setName] = useState(profile.displayName)
+    const [email, setEmail] = useState(profile.email)
+    const [location, setLocation] = useState(profile.location)
 
     /* intilize t variable for multi language implementation */
     const { t } = useTranslation();
@@ -54,7 +65,98 @@ function Settings(props) {
 
     const toggle = () => setDropdownOpen(!dropdownOpen);
 
-    const profile = useSelector(state => state.Auth.user)
+    const dispatch = useDispatch()
+    const db = firebase.firestore()
+    const authUser = getFirebaseBackend().getAuthenticatedUser()
+
+    const editProfile = async(e) => {
+
+        e.preventDefault()
+
+        const response = db.collection('users').doc(authUser.email)
+
+        if (profile.email !== email && email.trim() !== "")
+        {
+            firebase.auth().currentUser.updateEmail(email).then( () => {
+                console.log("email обновлен")
+                response.update({
+                    'profile.email': email
+                })
+                authUser.email = email
+
+            }).catch((err) => {
+                console.error(err)
+                setEmail(profile.email)
+            })
+        }
+        else
+            setEmail(profile.email)
+
+        if (profile.name !== name && name.trim() !== "")
+        {
+            if (profile.name !== "Аноним") {
+                response.update({
+                    'profile.displayName': name
+                }).then(() => {
+                    console.log("Имя обновлено")
+                }).catch((e) => {
+                    console.error(e)
+                    setName(profile.name)
+                })
+            }
+        }
+        else
+            setName(profile.name)
+
+        if (profile.location !== location && location.trim() !== "")
+        {
+            await response.update({
+                'profile.location': location
+            })
+        }
+        else
+            setLocation(profile.location)
+
+        const newUserData = {...authUser, displayName: name, location: location}
+        dispatch(refreshProfile(newUserData))
+        localStorage.setItem('authUser', JSON.stringify(newUserData));
+
+    }
+
+    const uploadAvatar = async(e) => {
+
+        let input = document.createElement('input')
+        input.type='file'
+        input.accept='image/*'
+        let avatar = null;
+
+        input.onchange = async(evt) => {
+            if (evt.target.files.length !== 0)
+            {
+                avatar = evt.target.files[0]
+                if (['image/jpeg', 'image/jpg', 'image/png'].includes(avatar.type))
+                {
+                    const storageRef = firebase.storage().ref()
+                    const avatarRef = storageRef.child('avatars/' + avatar.name)
+                    await avatarRef.put(avatar)
+                    const avatarURL = await avatarRef.getDownloadURL()
+
+                    const db = firebase.firestore();
+                    const authUser = getFirebaseBackend().getAuthenticatedUser();
+
+                    const authUserDoc = db.collection('users').doc(authUser.email)
+                    await authUserDoc.update({
+                        'profile.photoURL': avatarURL
+                    })
+
+                    const newUserData = {...authUser, photoURL: avatarURL}
+                    dispatch(refreshProfile(newUserData))
+                    localStorage.setItem('authUser', JSON.stringify(newUserData));
+                }
+            }
+        }
+        input.click()
+    }
 
     return (
         <React.Fragment>
@@ -67,7 +169,7 @@ function Settings(props) {
                     <div className="mb-4 profile-user">
                         {
                             profile.photoURL ?
-                              <img src={profile.photoURL} className="rounded-circle avatar-lg img-thumbnail"
+                              <img src={profile.photoURL} className="rounded-circle avatar-lg"
                                    alt="chatvia"/>
                               :
                               <div className="avatar-md rounded-circle img-thumbnail">
@@ -77,8 +179,8 @@ function Settings(props) {
                                 </span>
                               </div>
                         }
-                            <Button type="button" color="light" className="avatar-xs p-0 rounded-circle profile-photo-edit">
-                            <i className="ri-pencil-fill"></i>
+                            <Button type="button" color="light" className="avatar-xs p-0 rounded-circle profile-photo-edit" onClick={(e) => uploadAvatar(e)}>
+                                <i className="ri-pencil-fill"></i>
                             </Button>
                     </div>
 
@@ -108,17 +210,19 @@ function Settings(props) {
                             >
 
                                 <div className="float-end">
-                                    <Button color="light" size="sm" type="button" ><i className="ri-edit-fill me-1 align-middle"></i>Ред.</Button>
+                                    <Button color="light" size="sm" type="button" onClick={(e) => editProfile(e)}><i className="ri-edit-fill me-1 align-middle"></i>Ред.</Button>
                                 </div>
 
                                 <div>
                                     <p className="text-muted mb-1">Имя</p>
-                                    <h5 className="font-size-14">{profile.displayName}</h5>
+                                    {/*<h5 className="font-size-14" contentEditable={true} onChange={(e) => console.log(e.target)}>{name}</h5>*/}
+                                    <MyInput value={name} onChange={(e) => setName(e.target.value)}/>
                                 </div>
 
                                 <div className="mt-4">
                                     <p className="text-muted mb-1">Email</p>
-                                    <h5 className="font-size-14">{profile.email}</h5>
+                                    {/*<h5 className="font-size-14">{email}</h5>*/}
+                                    <MyInput value={email} onChange={(e) => setEmail(e.target.value)} disabled/>
                                 </div>
 
                                 {/*<div className="mt-4">*/}
@@ -128,7 +232,8 @@ function Settings(props) {
 
                                 <div className="mt-4">
                                     <p className="text-muted mb-1">Расположение</p>
-                                    <h5 className="font-size-14 mb-0">{profile.location}</h5>
+                                    {/*<h5 className="font-size-14 mb-0">{location}</h5>*/}
+                                    <MyInput value={location} onChange={(e) => setLocation(e.target.value)}/>
                                 </div>
                             </CustomCollapse>
                         </Card>

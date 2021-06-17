@@ -9,7 +9,7 @@ import {changeTheme, hideChat, setActiveTab} from "../../redux/actions";
 //Import Images
 // import logo from "../../assets/images/logo.svg"
 import logo from "../../assets/images/myimg/orange.png"
-import avatar1 from "../../assets/images/users/avatar-1.jpg";
+// import avatar1 from "../../assets/images/users/avatar-1.jpg";
 
 
 //i18n
@@ -133,13 +133,20 @@ function LeftSidebarMenu(props) {
                         </UncontrolledTooltip>
                         <Dropdown nav isOpen={dropdownOpenMobile} toggle={toggleMobile} className="profile-user-dropdown d-inline-block d-lg-none">
                             <DropdownToggle nav>
-                                <img src={avatar1} alt="chatvia" className="profile-user rounded-circle" />
+                                {
+                                    props.profile.photoURL ? <img src={props.profile.photoURL} alt="chatvia" className="profile-user rounded-circle" /> :
+                                      <div className="avatar-sm rounded-circle img-thumbnail" style={{marginLeft: '5%'}}>
+                                        <span className="avatar-title rounded-circle bg-soft-primary text-primary">
+                                            {props.profile.displayName.charAt(0)}
+                                        </span>
+                                      </div>
+                                }
                             </DropdownToggle>
                             <DropdownMenu>
-                                <DropdownItem onClick={() => { toggleTab('profile'); }}>Profile <i className="ri-profile-line float-end text-muted"></i></DropdownItem>
-                                <DropdownItem onClick={() => { toggleTab('settings'); }}>Setting <i className="ri-settings-3-line float-end text-muted"></i></DropdownItem>
+                                <DropdownItem onClick={() => { toggleTab('profile'); }}>Профиль <i className="ri-profile-line float-end text-muted"></i></DropdownItem>
+                                <DropdownItem onClick={() => { toggleTab('settings'); }}>Настройки <i className="ri-settings-3-line float-end text-muted"></i></DropdownItem>
                                 <DropdownItem divider />
-                                <DropdownItem href="/logout">Log out <i className="ri-logout-circle-r-line float-end text-muted"></i></DropdownItem>
+                                <DropdownItem href="/logout">Выйти <i className="ri-logout-circle-r-line float-end text-muted"></i></DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
                     </Nav>
